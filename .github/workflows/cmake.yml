@@ -1,0 +1,29 @@
+name: CMake
+
+on:
+  push: {}
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: run cmake
+      working-directory: ${{github.workspace}}/homework_01
+      run: cmake -B./build .
+      
+    - name: make
+      working-directory: ${{github.workspace}}/homework_01/build
+      run: make
+    
+    - name: test
+      working-directory: ${{github.workspace}}/homework_01/build
+      run: ./tests
+  
