@@ -29,5 +29,5 @@ jobs:
     
     - name: test task 02
       working-directory: ${{github.workspace}}/homework_01/build
-      run: ./task_01/tests_02
+      run: ./task_02/tests_02
   
