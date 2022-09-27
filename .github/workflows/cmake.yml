@@ -23,11 +23,11 @@ jobs:
       working-directory: ${{github.workspace}}/homework_01/build
       run: make
     
-#     - name: test
-#       working-directory: ${{github.workspace}}/homework_01/build
-#       run: ./tests
-      
-    - name: run main
+    - name: test task 01
       working-directory: ${{github.workspace}}/homework_01/build
-      run: ./homework_01
+      run: ./task_01/tests_01
+    
+    - name: test task 02
+      working-directory: ${{github.workspace}}/homework_01/build
+      run: ./task_01/tests_02
   

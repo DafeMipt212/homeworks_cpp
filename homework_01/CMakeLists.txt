@@ -1,41 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
+project(homework_01)
 
-set(PROJECT_NAME homework_01)
-project(${PROJECT_NAME})
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_01)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
-file(GLOB_RECURSE source_list "src/*.cpp" "src/*.hpp")
-file(GLOB_RECURSE main_source_list "src/main.cpp")
-file(GLOB_RECURSE test_source_list "src/*.cpp")
-file(GLOB_RECURSE test_list "src/*test.cpp")
-
-message("source_list ${source_list}")
-message("test_source_list ${test_source_list}")
-message("main_source_list ${main_source_list}")
-
-list(REMOVE_ITEM test_source_list ${main_source_list})
-list(REMOVE_ITEM source_list ${test_list})
-message("test_source_list ${test_source_list}")
-message("source_list ${source_list}")
-
-
-include_directories(${PROJECT_NAME} PUBLIC src)
-
-add_executable(${PROJECT_NAME} ${source_list})
-
-Include(FetchContent)
-
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.0.0-preview3
-)
-
-FetchContent_MakeAvailable(Catch2)
-
-add_executable(tests ${test_source_list})
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_02)
