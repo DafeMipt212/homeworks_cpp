@@ -47,3 +47,6 @@ build/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Clangd cache
+.cache/
