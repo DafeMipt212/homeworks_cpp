@@ -3,5 +3,5 @@
 #include <stack>
 
 std::vector<std::string> SplitString(const std::string& data) {
-  return {};
+  return {data};
 }
