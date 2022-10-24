@@ -144,3 +144,4 @@ float Calculate(const std::string &str){
     }
     return conductor(values, flags, num_of_operations);
 }
+
