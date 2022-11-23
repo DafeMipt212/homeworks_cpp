@@ -11,7 +11,7 @@ std::vector<std::string> SplitString(const std::string& data) {
   std::vector<std::string> v;
   std::string buff = "";
   bool flag = false;  //скобки закрыты (или их нет)
-  cout << size(data) << endl;
+  // cout << size(data) << endl;
   for (int i = 0; i < size(data); ++i) {
     if (data[i] == '(') {
       flag = true;  //скобки открыты
@@ -21,8 +21,8 @@ std::vector<std::string> SplitString(const std::string& data) {
     if (((data[i] != ' ') and (data[i] != '\t')) or (flag == true)) {
       buff += data[i];
     }
-    cout << "Data" << i << " : " << data[i] << endl;
-    cout << "Buff: " << buff << endl;
+    // cout << "Data" << i << " : " << data[i] << endl;
+    // cout << "Buff: " << buff << endl;
     if (flag == false) {
       if ((data[i] == ' ') or (data[i] == '\t') or (i + 1 >= size(data))) {
         if (buff != "") {
@@ -39,6 +39,6 @@ std::vector<std::string> SplitString(const std::string& data) {
       }
     }
   }
-  std::cout << "Size of vector: " << v.size() << "\n";
+  // std::cout << "Size of vector: " << v.size() << "\n";
   return v;
 }
