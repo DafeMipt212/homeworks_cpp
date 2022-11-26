@@ -1,28 +1,46 @@
 #include "utils.hpp"
+
+#include <cstring>
 #include <iostream>
 #include <stack>
 
 int Calculate(const std::string &data) {
-  char element_a = data[0];
+  std::string number = "";
+  char action;
+  int int_number = 0;
+  int int_numbers[2];
+  int n = 0;
+  int i = 0;
+  int answer = 0;
 
-  int int_a = int(element_a);
+  for (char c : data) {
+    if ((c == '0') || (c == '1') || (c == '2') || (c == '3') || (c == '4') ||
+        (c == '5') || (c == '6') || (c == '7') || (c == '8') || (c == '9')) {
+      number = number + c;
+    } else {
+      int_number = atoi(number.c_str());
+      int_numbers[n] = int_number;
+      n = n + 1;
+      number.clear();
+      if ((c == '+') || (c == '-') || (c == '*') || (c == '/')) {
+        action = c;
+      }
+    }
+  }
 
-  char action = data[1];
-
-  char element_b = data[2];
-
-  int int_b = int(element_b);
+  int_numbers[n] = atoi(number.c_str());
 
   if (action == '+') {
-    return element_a + element_b;
+    answer = (int_numbers[0] + int_numbers[1]);
   }
   if (action == '-') {
-    return element_a - element_b;
-  }
-  if (action == '/') {
-    return element_a / element_b;
+    answer = (int_numbers[0] - int_numbers[1]);
   }
   if (action == '*') {
-    return element_a * element_b;
+    answer = (int_numbers[0] * int_numbers[1]);
   }
+  if (action == '/') {
+    answer = (int_numbers[0] / int_numbers[1]);
+  }
+  return answer;
 }

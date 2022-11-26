@@ -1,40 +1,51 @@
+#include "utils.hpp"
 #include <string>
 #include <string_view>
 #include <vector>
 
-std::vector<std::string> SplitString(const std::string &data) {
-  std::vector<std::string> words;
-  std::string word = "";
-  int check_int = 0;
-  for (char const &symbol : data) {
-    if (check_int == 0) {
-      if (symbol == '(') {
-        check_int = 1;
-      } else if (symbol != ' ' and symbol != '\t') {
-        word.push_back(symbol);
-      } else if (symbol != ' ' or symbol == '\t') {
-        if (!word.empty()) {
-          words.push_back(word);
-          word.clear();
+std::vector<std::string> SplitString(std::string const& data) {
+  std::vector<std::string> end_of_working;
+  std::string active_data = "";
+  std::string skob_index = "False";
+
+
+  for (char const& word_symbol : data) {
+    if (skob_index == "False") {
+      if (word_symbol == '(') {
+        skob_index = "True";
+      } 
+      else if (word_symbol != ' ') {
+        if (word_symbol != '\t'){
+          active_data.push_back(word_symbol);
+        } 
+        else if (!active_data.empty()) {
+          end_of_working.push_back(active_data);
+          active_data.clear();
         }
       };
     };
-    if (check_int == 1) {
-      if (symbol != ')') {
-        word.push_back(symbol);
-      } else if (symbol == ')') {
-        word.push_back(symbol);
-        if (!word.empty()) {
-          words.push_back(word);
-          word.clear();
+
+
+    if (skob_index == "True") {
+      if (word_symbol != ')') {
+        active_data.push_back(word_symbol);
+      } 
+      else if (word_symbol == ')') {
+        active_data.push_back(word_symbol);
+        if (!active_data.empty()) {
+          end_of_working.push_back(active_data);
+          active_data.clear();
         }
-        check_int = 0;
+        skob_index = "False";
       };
     };
   };
-  if (!word.empty()) {
-    words.push_back(word);
-    word.clear();
+
+
+
+  if (!active_data.empty()) {
+    end_of_working.push_back(active_data);
+    active_data.clear();
   }
-  return {words};
+  return end_of_working;
 };
