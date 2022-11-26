@@ -4,34 +4,39 @@
 using namespace std;
 
 
-int Calculate(const std::string& data) 
-{
-  char oper;
-  float num1, num2;
-  cout << "Enter an expression like 'number-operation-number' without spaces"<< endl;
-  cin >> num1 >> oper >>  num2;
+
+int Calculate(const std::string& data) {
+  char oper = data[1];
+  char n1 = data[0];
+  char n2 = data[2];
+  int num1 = n1 - 48;
+  int num2 = n2 - 48;
+  int result;
   switch (oper) {
       case '+':
-        cout << num1 + num2 << endl;
+        result = num1 + num2;
         break;
 
       case '-':
-        cout << num1 - num2 << endl;
+        result = num1 - num2;
         break;
 
       case '*':
-        cout << num1 * num2 << endl;
+        result = num1 * num2;
         break;
 
-      case '/':
-        cout << num1 / num2 << endl;;
+       case '/':
+        if (num2 == 0){
+          result=2147483647;
+        }
+        else{
+          result = (int)num1 / num2;
+        }
         break;
-
       default:
         cout << "Error! operator is not correct";
         break;
+
     }
-
-    return 0;
-
+return result;
 }

@@ -1,0 +1,1 @@
+/usr/bin/clang++-14 -g CMakeFiles/tests_01.dir/src/split_string_test.cpp.o CMakeFiles/tests_01.dir/src/utils.cpp.o -o tests_01  ../_deps/catch2-build/src/libCatch2Maind.a ../_deps/catch2-build/src/libCatch2d.a 
