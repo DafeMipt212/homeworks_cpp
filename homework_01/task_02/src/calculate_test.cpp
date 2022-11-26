@@ -22,3 +22,10 @@ TEST_CASE("Calculate", "[simple_multiply]") {
   CHECK(Calculate("1*0") == 0);
   CHECK(Calculate("0*0") == 0);
 }
+
+TEST_CASE("Calculate", "[simple_division]"){
+  CHECK(Calculate("2/1") == 2);
+  CHECK(Calculate("8/4") == 2);
+  CHECK(Calculate("8/2") == 4);
+  CHECK(Calculate("2/0") == 2147483647);
+}
