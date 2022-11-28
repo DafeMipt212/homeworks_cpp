@@ -10,7 +10,6 @@ int Calculate(const std::string &data) {
   int int_number = 0;
   int int_numbers[2];
   int n = 0;
-  int i = 0;
   int answer = 0;
 
   for (char c : data) {

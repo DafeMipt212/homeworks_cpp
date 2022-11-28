@@ -1,51 +1,33 @@
-#include "utils.hpp"
 #include <string>
 #include <string_view>
 #include <vector>
-
 std::vector<std::string> SplitString(std::string const& data) {
-  std::vector<std::string> end_of_working;
+  std::vector<std::string> finish_array;
   std::string active_data = "";
-  std::string skob_index = "False";
-
-
-  for (char const& word_symbol : data) {
-    if (skob_index == "False") {
-      if (word_symbol == '(') {
-        skob_index = "True";
-      } 
-      else if (word_symbol != ' ') {
-        if (word_symbol != '\t'){
-          active_data.push_back(word_symbol);
-        } 
-        else if (!active_data.empty()) {
-          end_of_working.push_back(active_data);
-          active_data.clear();
-        }
+  bool brackets_condition = false;
+  for (char const& active_element : data) {
+    if (brackets_condition) {
+      active_data.push_back(active_element);
+      if (active_element == ')') {
+        brackets_condition = false;
+        finish_array.push_back(active_data);
+        active_data = "";
       };
-    };
-
-
-    if (skob_index == "True") {
-      if (word_symbol != ')') {
-        active_data.push_back(word_symbol);
-      } 
-      else if (word_symbol == ')') {
-        active_data.push_back(word_symbol);
+    } else {
+      if (active_element == ' ' || active_element == '\t') {
         if (!active_data.empty()) {
-          end_of_working.push_back(active_data);
-          active_data.clear();
+          finish_array.push_back(active_data);
+          active_data = "";
         }
-        skob_index = "False";
-      };
+      } else {
+        active_data.push_back(active_element);
+        if (active_element == '(') brackets_condition = true;
+      }
     };
   };
-
-
-
   if (!active_data.empty()) {
-    end_of_working.push_back(active_data);
-    active_data.clear();
+    finish_array.push_back(active_data);
+    active_data = "";
   }
-  return end_of_working;
+  return finish_array;
 };
