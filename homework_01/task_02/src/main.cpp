@@ -5,4 +5,9 @@
 #include <stack>
 #include <utils.hpp>
 using namespace std;
-int main() { return 0; }
+int main() {
+  cout << "Itog:" << endl;
+  cout << Calculate("8/0") << endl;
+  cout << Calculate("8 / 0") << endl;
+  return 0;
+}

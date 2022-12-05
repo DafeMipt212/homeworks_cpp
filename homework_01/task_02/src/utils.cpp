@@ -31,12 +31,12 @@ std::vector<std::string> SplitString(const std::string& data) {
         if (buff != "") {
           v.push_back(buff);
           buff = "";
-          if ((data[i] == '+') or (data[i] == '-') or (data[i] == '*') or
-              (data[i] == '/')) {
-            buff += data[i];
-            v.push_back(buff);
-            buff = "";
-          }
+        }
+        if ((data[i] == '+') or (data[i] == '-') or (data[i] == '*') or
+            (data[i] == '/')) {
+          buff += data[i];
+          v.push_back(buff);
+          buff = "";
         }
       }
     } else {
@@ -54,18 +54,19 @@ std::vector<std::string> SplitString(const std::string& data) {
 int Calculate(const std::string& data) {
   int i = 0;
   int buff_int = 0;
-  std::string znak;
+  std::string znak = "";
   int rez = 0;
   vector<int> chisla;
   vector<string> r = SplitString(data);
   for (i = 0; i < r.size(); ++i) {
+    cout << r[i] << endl;
     if ((r[i] != "+") and (r[i] != "-") and (r[i] != "*") and (r[i] != "/")) {
       chisla.push_back(stoi(r[i]));
     } else {
       znak = r[i];
     }
   }
-  if (!chisla.empty())
+  if (!chisla.empty() and !znak.empty())
     rez = chisla[0];
   else {
     cout << "Error" << endl;
@@ -83,7 +84,12 @@ int Calculate(const std::string& data) {
         rez *= chisla[i];
       }
       if (znak == "/") {
-        rez /= chisla[i];
+        if (chisla[i] != 0)
+          rez /= chisla[i];
+        else {
+          cout << "Delit na Nol nelzya!" << endl;
+          rez = -1;
+        }
       }
     }
   }
