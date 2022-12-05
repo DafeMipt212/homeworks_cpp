@@ -1,10 +1,13 @@
+#include <string.h>
+
 #include <iostream>
-
+#include <regex>
+#include <stack>
 #include <utils.hpp>
-
+using namespace std;
 int main() {
-  std::string data;
-  std::getline(std::cin, data);
-  std::cout << Calculate(data);
+  cout << "Itog:" << endl;
+  cout << Calculate("8/0") << endl;
+  cout << Calculate("8 / 0") << endl;
   return 0;
 }
