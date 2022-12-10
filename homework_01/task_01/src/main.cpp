@@ -6,7 +6,7 @@ int main() {
   for (const auto& word : SplitString(
       "asdas das das fgag (adasd 1fas)")
   ) {
-    std::cout << word << "\n";
+    sstd::cout << word<< "\n";
   }
   return 0;
 }
