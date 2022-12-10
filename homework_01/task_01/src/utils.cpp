@@ -21,7 +21,7 @@ std::vector<std::string> SplitString(const std::string &str) {
     }
     if (c == '(') {
       braces.push_back(c);
-    } else if ((braces.size() > 0) && (c == ')')) {
+    } else if (braces.size() > 0 && c == ')') {
       if (braces.back() == '(') {
         braces.pop_back();
       }
