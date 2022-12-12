@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Install gtest manually
       run: sudo apt-get install libgtest-dev
-      
+
     - uses: actions/checkout@v3
     
     - name: run cmake
@@ -28,9 +28,9 @@ jobs:
     
     - name: test task 01
       working-directory: ${{github.workspace}}/homework_01/build
-      run: ./task_01/tests_01
+      run: ./task_1_01/tests_1_01
     
     - name: test task 02
       working-directory: ${{github.workspace}}/homework_01/build
-      run: ./task_02/tests_02
+      run: ./task_1_02/tests_1_02
   
