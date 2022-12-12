@@ -1,3 +1,4 @@
+#include <iostream>
 #include "utils.hpp"
 #include <regex>
 #include <stack>
@@ -51,43 +52,43 @@ int Calculate(const std::string& data) {
         }
 
         if (pr) {
-            v1[v1.size()-1] *= std::stod(v[i]);
+            v1[v1.size()-1] *= std::stoi(data[i]);
             pr = 0;
             continue;
         }
 
         if (dl) {
-            v1[v1.size()-1] /= std::stod(v[i]);
+            v1[v1.size()-1] /= std::stoi(data[i]);
             dl = 0;
             continue;
         }
 
         if (mns) {
-            v1.push_back(-std::stod(v[i]));
+            v1.push_back(-std::stoi(data[i]));
             mns = 0;
             continue;
         }
 
-        if (v[i] == "*") {
+        if (data[i] == "*") {
             pr = 1;
             continue;
         }
 
-        if (v[i] == "/") {
+        if (data[i] == "/") {
             dl = 1;
             continue;
         }
 
-        if (v[i] == "-") {
+        if (data[i] == "-") {
             mns = 1;
             continue;
         }
 
-        if (v[i] == "+") {
+        if (data[i] == "+") {
             continue;
         }
 
-        v1.push_back(std::stod(v[i]));
+        v1.push_back(std::stoi(data[i]));
     }
 
     int answer = 0;
@@ -96,5 +97,5 @@ int Calculate(const std::string& data) {
         answer += n;
     }
 
-    return (int)answer;
+    return answer;
 }
