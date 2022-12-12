@@ -26,13 +26,7 @@ jobs:
       working-directory: ${{github.workspace}}/homework_01/build
       run: make
     
-    - name: test task 01
-      continue-on-error: true
+    - name: tests
       working-directory: ${{github.workspace}}/homework_01/build
       run: ./task_01/tests_1_01
-    
-    - name: test task 02
-      continue-on-error: true
-      working-directory: ${{github.workspace}}/homework_01/build
-      run: ./task_02/tests_1_02
-  
+
