@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include <string_view>
 #include <vector>
-
-int Calculate(const std::string& data);
-std::vector<std::string> SearchValues(std::string str);
-char SearchOperation(std::string str);
+#include <stack>
+double Calculate(const std::string& data);
+void Search(std::string str,std::stack<char>& operation, std::stack<double>& values);
+int Rang(char c);
+bool Math(std::stack<char>& operation, std::stack<double>& values);
