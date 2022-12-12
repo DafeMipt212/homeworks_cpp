@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME task_02)
+set(PROJECT_NAME task_1_02)
 project(${PROJECT_NAME})
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB_RECURSE source_list "src/*.cpp" "src/*.hpp")
@@ -18,15 +18,19 @@ include_directories(${PROJECT_NAME} PUBLIC src)
 
 add_executable(${PROJECT_NAME} ${source_list})
 
-Include(FetchContent)
+# Locate GTest
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG v3.1.0
+# Link runTests with what we want to test and the GTest and pthread library
+add_executable(tests_1_02 ${test_source_list})
+target_link_libraries(
+  tests_1_02
+  GTest::gtest_main
 )
 
-FetchContent_MakeAvailable(Catch2)
+include(GoogleTest)
+gtest_discover_tests(tests_1_02)
 
-add_executable(tests_02 ${test_source_list})
-target_link_libraries(tests_02 PRIVATE Catch2::Catch2WithMain)
+# target_link_libraries(tests_1_02 ${GTEST_LIBRARIES} pthread)

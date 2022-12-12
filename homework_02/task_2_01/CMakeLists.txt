@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME task_1_01)
+set(PROJECT_NAME task_2_01)
 project(${PROJECT_NAME})
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB_RECURSE source_list "src/*.cpp" "src/*.hpp")
@@ -24,13 +24,13 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Link runTests with what we want to test and the GTest and pthread library
-add_executable(tests_1_01 ${test_source_list})
+add_executable(tests_2_01 ${test_source_list})
 target_link_libraries(
-  tests_1_01
-  GTest::gtest_main
+    tests_2_01
+    GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(tests_1_01)
+gtest_discover_tests(tests_2_01)
 
-# target_link_libraries(tests_1_02 ${GTEST_LIBRARIES} pthread)
+# target_link_libraries(tests_2_01 ${GTEST_LIBRARIES} pthread)
