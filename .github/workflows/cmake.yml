@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: install gtest
-      run: apt-get install googletest
+      run: sudo apt-get install googletest
 
     - uses: actions/checkout@v3
     
