@@ -1,5 +1,6 @@
 #include "utils.hpp"
 #include <regex>
+#include <stack>
 #define vector_string std::vector<std::string>
 
 bool is_numb(const std::string &str) {
