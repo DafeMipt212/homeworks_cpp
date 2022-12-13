@@ -11,7 +11,7 @@ bool is_number(const std::string &str) {
 int Calculate(const std::string& data) {
     std::vector<int> terms; // хотела сделать тип double, но в тестах int, так что пока так
     std::string tmp;
-    std::string number; // пока нигде не используется, скоро будет; исправлю проблему с методом stoi и в целом с логикой
+    std::string number;
     bool is_brackets = 0;
     bool multipl = 0;
     bool division = 0;
@@ -20,7 +20,11 @@ int Calculate(const std::string& data) {
     for (size_t i = 0; i < data.size(); ++i) {
         if (is_brackets) {
             if (data[i] == ')') {
-                int tmp_ans = Calculate(tmp);
+                try {
+                    int tmp_ans = Calculate(tmp);
+                } catch (std::string error) {
+                    throw (error);
+                }
 
                 if (multipl) {
                     terms[terms.size()-1] *= tmp_ans;
@@ -55,8 +59,7 @@ int Calculate(const std::string& data) {
         }
 
         if (!is_number(number)) {
-            std::cout << "ошибка!\n";
-            return 0;
+            throw ("ошибка!\n");
         }
 
         if (data[i] == '(') {
