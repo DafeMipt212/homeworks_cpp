@@ -22,25 +22,25 @@ int Calculate(const std::string& data) {
             if (data[i] == ')') {
                 try {
                     int tmp_ans = Calculate(tmp);
+   
+                    if (multipl) {
+                        terms[terms.size()-1] *= tmp_ans;
+                        multipl = 0;
+                    } else if (division) {
+                        terms[terms.size()-1] /= tmp_ans;
+                        division = 0;
+                    } else if (minus) {
+                        terms.push_back(-tmp_ans);
+                        minus = 0;
+                    } else {
+                       terms.push_back(tmp_ans);
+                    }
+
+                    tmp = "";
+                    is_brackets = 0;
                 } catch (std::string error) {
                     throw (error);
                 }
-
-                if (multipl) {
-                    terms[terms.size()-1] *= tmp_ans;
-                    multipl = 0;
-                } else if (division) {
-                    terms[terms.size()-1] /= tmp_ans;
-                    division = 0;
-                } else if (minus) {
-                    terms.push_back(-tmp_ans);
-                    minus = 0;
-                } else {
-                   terms.push_back(tmp_ans);
-                }
-
-                tmp = "";
-                is_brackets = 0;
             } else {
                 tmp += data[i];
             }
@@ -74,7 +74,7 @@ int Calculate(const std::string& data) {
             terms[terms.size()-1] /= std::stoi(number);
             division = 0;
         } else if (minus) {
-            terms.push_back(-std::stoi(number);
+            terms.push_back(-std::stoi(number));
             minus = 0;
         } else {
             terms.push_back(std::stoi(number));
@@ -93,6 +93,19 @@ int Calculate(const std::string& data) {
         }
 
         number = "";
+    }
+
+    if (multipl) {
+        terms[terms.size()-1] *= std::stoi(number);
+        multipl = 0;
+    } else if (division) {
+        terms[terms.size()-1] /= std::stoi(number);
+        division = 0;
+    } else if (minus) {
+        terms.push_back(-std::stoi(number));
+        minus = 0;
+    } else {
+        terms.push_back(std::stoi(number));
     }
 
     int answer = 0;
