@@ -1,10 +1,9 @@
 #include <iostream>
-#include "utils.hpp"
 #include <regex>
 #include <stack>
-#define vector_string std::vector<std::string>
+#include "utils.hpp"
 
-bool is_numb(const std::string &str) {
+bool is_number(const std::string &str) {
     static const std::regex r(R"([+-]?(\d*\.)?\d+([Ee[+-]?\d+)?)");
     return std::regex_match(str, r);
 }
@@ -15,13 +14,17 @@ int Calculate(const std::string& data) {
     bool f = 0, pr = 0, dl = 0, mns = 0;
     
     for (size_t i = 0; i < data.size(); ++i) {
-        if (data[i] != "*" && data[i] != "+" && data[i] != "-" && data[i] != "/" && !(is_numb(data[i]))) {
+        if (data[i] != '*' && 
+            data[i] != '+' && 
+            data[i] != '-' && 
+            data[i] != '/' && 
+            !(is_number(std::to_string(data[i])))) {
             std::cout << "ошибка!\n";
             return 0;
         }
 
         if (f) {
-            if (data[i] == ")") {
+            if (data[i] == ')') {
                 int tmp_ans = Calculate(tmp);
 
                 if (pr) {
@@ -46,7 +49,7 @@ int Calculate(const std::string& data) {
             continue;
         }
 
-        if (data[i] == "(") {
+        if (data[i] == '(') {
             f = 1;
             continue;
         }
@@ -69,22 +72,22 @@ int Calculate(const std::string& data) {
             continue;
         }
 
-        if (data[i] == "*") {
+        if (data[i] == '*') {
             pr = 1;
             continue;
         }
 
-        if (data[i] == "/") {
+        if (data[i] == '/') {
             dl = 1;
             continue;
         }
 
-        if (data[i] == "-") {
+        if (data[i] == '-') {
             mns = 1;
             continue;
         }
 
-        if (data[i] == "+") {
+        if (data[i] == '+') {
             continue;
         }
 
