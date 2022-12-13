@@ -18,24 +18,15 @@ int Calculate(const std::string& data) {
     bool minus = 0;
     
     for (size_t i = 0; i < data.size(); ++i) {
-        if (data[i] != '*' && 
-            data[i] != '+' && 
-            data[i] != '-' && 
-            data[i] != '/' && 
-            !(is_number(data[i]))) {
-            std::cout << "ошибка!\n";
-            return 0;
-        }
-
         if (is_brackets) {
             if (data[i] == ')') {
                 int tmp_ans = Calculate(tmp);
 
                 if (multipl) {
-                    terms[v1.size()-1] *= tmp_ans;
+                    terms[terms.size()-1] *= tmp_ans;
                     multipl = 0;
                 } else if (division) {
-                    terms[v1.size()-1] /= tmp_ans;
+                    terms[terms.size()-1] /= tmp_ans;
                     division = 0;
                 } else if (minus) {
                     terms.push_back(-tmp_ans);
@@ -44,13 +35,28 @@ int Calculate(const std::string& data) {
                    terms.push_back(tmp_ans);
                 }
 
-                tmp = {};
+                tmp = "";
                 is_brackets = 0;
             } else {
-                tmp.push_back(data[i]);
+                tmp += data[i];
             }
 
             continue;
+        }
+
+        if (data[i] != '*' && 
+            data[i] != '+' && 
+            data[i] != '-' && 
+            data[i] != '/' &&
+            data[i] != '(' &&
+            data[i] != ')') {
+            number += data[i];
+            continue;
+        }
+
+        if (!is_number(number)) {
+            std::cout << "ошибка!\n";
+            return 0;
         }
 
         if (data[i] == '(') {
@@ -59,43 +65,31 @@ int Calculate(const std::string& data) {
         }
 
         if (multipl) {
-            terms[terms.size()-1] *= std::stoi(data[i]);
+            terms[terms.size()-1] *= std::stoi(number);
             multipl = 0;
-            continue;
-        }
-
-        if (division) {
-            terms[terms.size()-1] /= std::stoi(data[i]);
+        } else if (division) {
+            terms[terms.size()-1] /= std::stoi(number);
             division = 0;
-            continue;
-        }
-
-        if (minus) {
-            terms.push_back(-std::stoi(data[i]));
+        } else if (minus) {
+            terms.push_back(-std::stoi(number);
             minus = 0;
-            continue;
+        } else {
+            terms.push_back(std::stoi(number));
         }
 
         if (data[i] == '*') {
             multipl = 1;
-            continue;
         }
 
         if (data[i] == '/') {
             division = 1;
-            continue;
         }
 
         if (data[i] == '-') {
             minus = 1;
-            continue;
         }
 
-        if (data[i] == '+') {
-            continue;
-        }
-
-        terms.push_back(std::stoi(data[i]));
+        number = "";
     }
 
     int answer = 0;
