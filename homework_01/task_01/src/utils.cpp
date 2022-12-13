@@ -3,24 +3,24 @@
 #include <stack>
 
 std::vector<std::string> SplitString(const std::string& data) {
-  std::vector<std::string> v;
+  std::vector<std::string> answer;
   std::string tmp = "";
 
-  for (auto c : s) {
-    if (c != ' ') {
-      tmp += c;
+  for (auto elem : data) {
+    if (elem != ' ' && elem != '\t') {
+      tmp += elem;
       continue;
     }
 
     if (tmp != "") {
-      v.push_back(tmp);
+      answer.push_back(tmp);
       tmp = "";
     }
   }
 
   if (tmp != "") {
-    v.push_back(tmp);
+    answer.push_back(tmp);
   }
 
-  return v;
+  return answer;
 }
