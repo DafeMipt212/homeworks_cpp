@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include <utils.hpp>
+#include "utils.hpp"
 
 int main() {
-  for (const auto& word : SplitString("asdas das das fgag (adasd 1fas)")) {
+  for (const auto& word : SplitString("a (a a) b (asd as) ")) {
     std::cout << word << "\n";
   }
   return 0;
