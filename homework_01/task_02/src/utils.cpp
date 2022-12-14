@@ -1,7 +1,28 @@
 #include "utils.hpp"
-
 #include <stack>
 
 int Calculate(const std::string& data) {
-  return 0;
+    int a, b, result;
+    result = 0;
+    a = data[0]-'0';
+    b = data[2] - '0';
+    switch (data[1]){
+    case ('+'):
+        result = a + b;
+        return result; 
+        break;
+    case ('-'):
+        result = a - b;
+        return result; 
+        break;
+    case ('*'):
+        result = a * b;
+        return result; 
+        break;
+    case ('/'):
+        result = a / b;
+        return result; 
+        break;
+    }
+    return 0;
 }
