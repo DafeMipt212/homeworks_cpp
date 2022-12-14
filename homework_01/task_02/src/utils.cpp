@@ -10,11 +10,11 @@ double Calculate(const std::string& data) {
             return values.top();
         }
     }
-    return values.top();  
+    return values.top(); 
 }
 
 bool Math(std::stack<char>& operation, std::stack<double>& values){
-    double a,b,c;
+    double a,b;
     a = values.top();
     values.pop();
     switch (operation.top()) {
@@ -22,22 +22,19 @@ bool Math(std::stack<char>& operation, std::stack<double>& values){
             b = values.top();
             values.pop();
             operation.pop();
-            c = b - a;
-            values.push(c);
+            values.push(b - a);
             break;
         case '+':
             b = values.top();
             values.pop();
             operation.pop();
-            c = b + a;
-            values.push(c);
+            values.push(b + a);
             break;
         case '*':
             b = values.top();
             values.pop();
             operation.pop();
-            c = b * a;
-            values.push(c);
+            values.push(b * a);
             break;
         case '/':
             b = values.top();
@@ -47,8 +44,13 @@ bool Math(std::stack<char>& operation, std::stack<double>& values){
             }
             values.pop();
             operation.pop();
-            c = b / a;
-            values.push(c);
+            values.push(b / a);
+            break;
+        case '^':
+            b = values.top();
+            values.pop();
+            operation.pop();
+            values.push(pow(b,a));
             break;
         default:
             return false;
@@ -60,10 +62,9 @@ void Search(std::string str,std::stack<char>& operation, std::stack<double>& val
     std::string word;
     int flag = 1;
     for (auto c : str) {
-        if (c == '+' || (c == '-' && flag == 0) || c == '*' || c == '/') {
+        if (c == '+' || (c == '-' && flag == 0) || c == '*' || c == '/' || c == '^') {
             if(!operation.empty() && Rang(c)<=Rang(operation.top())){
-                values.push(std::stof(word));
-                word = "";
+                PushValues(values,word);
                 Math(operation,values);
                 operation.push(c); 
             }
@@ -77,8 +78,7 @@ void Search(std::string str,std::stack<char>& operation, std::stack<double>& val
             continue;
         }
         if(c == ')'){
-            values.push(std::stof(word));
-            word = "";
+            PushValues(values,word);
             while(operation.top() != '('){
                 if(!Math(operation, values)){
                     return;
@@ -87,22 +87,27 @@ void Search(std::string str,std::stack<char>& operation, std::stack<double>& val
             operation.pop();
             continue;
         }
-        if (c != '+' && c != '-' && c != '*' && c != '/' ||  c == '-' && flag == 1) {
+        if (c >= '0' && c <= '9' || c == '.' ||  c == '-' && flag == 1) {
             word += c;
             flag = 0;
         }
-        else if (!word.empty()) {
-            values.push(std::stof(word));
-            word = "";
+        else{
+            PushValues(values,word);
         }
     }
-    if (!word.empty()){
-        values.push(std::stod(word));
+    PushValues(values,word);
+}
+
+void PushValues(std::stack<double>& values,std::string& word){
+    if(!word.empty()){
+        values.push(std::stof(word));
+        word = "";
     }
 }
+
 int Rang(char c){
-    if(c == '(' || c == ')')return 0;
     if(c == '+' || c == '-')return 1;
     if(c == '*' || c == '/')return 2;
+    if(c == '^')return 3;
     return 0;
 }
