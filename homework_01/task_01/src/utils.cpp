@@ -5,30 +5,33 @@
 #include <vector>
 using namespace std;
 
-vector <string> SplitString(string& s) {
+vector <string> SplitString(string& s){
     s += " ";
-    string s1 = "";
+    string CurrentString = "";
     char* ptr = &(s[0]);
-    vector <string> v;
+    vector <string> data;
 
     while(*ptr != '\0'){
-        if ((*ptr == ' ') or (*ptr == '\t')) {
-            if (s1 != "") v.push_back(s1);
-            s1 = "";
+        if (*ptr == '(') {
+            while((*ptr != ')') && (*ptr != '\0')){
+                CurrentString += *ptr;
+                ++ptr;
+            }
+            CurrentString += *ptr;
+            ++ptr;
+            data.push_back(CurrentString);
+            CurrentString = "";
+        }
+        if ((*ptr == ' ') || (*ptr == '\t')) {
+            if (CurrentString != "") data.push_back(CurrentString);
+            CurrentString = "";
         }
         else {
-            s1 += *ptr;
+            CurrentString += *ptr;
             }
         ++ptr;
-        }
-    for(int i = 0; i < v.size(); ++i){
-        cout << v[i] << endl;} 
-    return v;
-  //return {data};
-}
-
-int main(){
-    string s;    
-    getline(cin, s);
-    SplitString(s);
-}
+    }    
+    for(int i = 0; i < data.size(); ++i){
+        cout << data[i] << endl;} 
+    return data;
+    }
