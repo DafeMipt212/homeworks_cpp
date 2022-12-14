@@ -23,7 +23,7 @@ std::vector<std::string> SplitString(const std::string& data) {
     }
 
     if (elem == '(') {
-      is_bracket == 1;
+      is_bracket = 1;
       continue;
     }
 
