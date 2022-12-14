@@ -2,7 +2,7 @@
 
 #include <stack>
 
-auto split_string(const std::string &str) {
+auto SplitString(const std::string &str) {
   std::vector<char> braces;
   std::vector<std::string> res;
   std::string temp;
@@ -29,8 +29,8 @@ auto split_string(const std::string &str) {
   return res;
 }
 
-std::string prep_string(std::string str) {
-  auto vect = split_string(str);
+std::string PrepString(std::string str) {
+  auto vect = SplitString(str);
   std::string temp_str;
   for (auto i : vect) {
     temp_str += i;
@@ -49,15 +49,13 @@ std::string prep_string(std::string str) {
   }
   return final_str;
 }
-
-float conductor(std::vector<float> values, std::vector<char> flags,
+float Conductor(std::vector<float> values, std::vector<char> flags,
                 int num_of_operations) {
   int i = 0;
   std::vector<float> final_vals;
   int index = 0;
   float temp_value = 0;
   while (num_of_operations > 0) {
-    // * /
     for (int i = 0; i < flags.size(); ++i) {
       if ((flags.at(i) == '*') || (flags.at(i) == '/')) {
         if (flags.at(i) == '*') {
@@ -71,12 +69,12 @@ float conductor(std::vector<float> values, std::vector<char> flags,
 
         flags.erase(flags.begin() + i - 1, flags.begin() + i + 2);
         flags.insert(flags.begin() + i - 1, '~');
+        i -= 2;
 
         final_vals.push_back(temp_value);
         num_of_operations -= 1;
       }
     }
-    // + -
     for (int i = 0; i < flags.size(); ++i) {
       if ((flags.at(i) == '+') || (flags.at(i) == '-')) {
         if (flags.at(i) == '+') {
@@ -91,6 +89,7 @@ float conductor(std::vector<float> values, std::vector<char> flags,
 
         flags.erase(flags.begin() + i - 1, flags.begin() + i + 2);
         flags.insert(flags.begin() + i - 1, '~');
+        i -= 2;
 
         final_vals.push_back(temp_value);
         num_of_operations -= 1;
@@ -100,17 +99,13 @@ float conductor(std::vector<float> values, std::vector<char> flags,
   return values.at(0);
 }
 
-std::string brace_clipper(std::string str) {
-  std::string f_str;
-  for (int i = 1; i < str.size() - 1; ++i) {
-    f_str += str[i];
-  }
-  return f_str;
+std::string BraceClipper(const std::string &str) {
+  return str.substr(1, str.size() - 2);
 }
 
-// calculator
 float Calculate(const std::string &str) {
-  auto vect = split_string(str);
+  std::string str1 = PrepString(str);
+  auto vect = SplitString(str1);
   float result = 0;
   std::vector<float> values;
   std::vector<char> flags;
@@ -118,15 +113,11 @@ float Calculate(const std::string &str) {
 
   for (int i = 0; i < vect.size(); ++i) {
     std::string el = vect.at(i);
-
-    // braces
     if ((el[0] == '(') || (el[0] == '{') || (el[0] == '[')) {
-      values.push_back(Calculate(brace_clipper(el)));
+      values.push_back(Calculate(BraceClipper(el)));
       flags.push_back('~');
-    }
-    // other cases
-    else if ((el[0] == '+') || (el[0] == '-') || (el[0] == '*') ||
-             (el[0] == '/')) {
+    } else if ((el[0] == '+') || (el[0] == '-') || (el[0] == '*') ||
+               (el[0] == '/')) {
       flags.push_back(el[0]);
       values.push_back(0);
       num_of_operations += 1;
@@ -135,5 +126,5 @@ float Calculate(const std::string &str) {
       flags.push_back('~');
     }
   }
-  return conductor(values, flags, num_of_operations);
+  return Conductor(values, flags, num_of_operations);
 }
