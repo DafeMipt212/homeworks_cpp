@@ -8,8 +8,8 @@ bool is_number(const std::string &str) {
     return std::regex_match(str, r);
 }
 
-int Calculate(const std::string& data) {
-    std::vector<int> terms; // хотела сделать тип double, но в тестах int, так что пока так
+double Calculate(const std::string& data) {
+    std::vector<double> terms;
     std::string tmp;
     std::string number;
     bool is_brackets = 0;
@@ -21,7 +21,7 @@ int Calculate(const std::string& data) {
         if (is_brackets) {
             if (data[i] == ')') {
                 try {
-                    int tmp_ans = Calculate(tmp);
+                    double tmp_ans = Calculate(tmp);
    
                     if (multipl) {
                         terms[terms.size()-1] *= tmp_ans;
@@ -108,7 +108,7 @@ int Calculate(const std::string& data) {
         terms.push_back(std::stoi(number));
     }
 
-    int answer = 0;
+    double answer = 0;
 
     for (auto n : terms) {
         answer += n;
