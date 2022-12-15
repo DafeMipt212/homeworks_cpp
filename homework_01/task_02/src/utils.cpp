@@ -1,8 +1,6 @@
 #include "utils.hpp"
 
 #include <stack>
-
-#include <stack>
 #include <iostream>
 #include <vector>
 using namespace std;
