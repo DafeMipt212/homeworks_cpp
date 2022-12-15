@@ -13,7 +13,7 @@ std::vector<std::string> SplitString(const std::string& data) {
         is_bracket = 0;
         if (tmp != "") {
           answer.push_back(tmp);
-          tmp = "";
+          tmp.clear();
         }
       } else {
         tmp += elem;
@@ -34,7 +34,7 @@ std::vector<std::string> SplitString(const std::string& data) {
 
     if (tmp != "") {
       answer.push_back(tmp);
-      tmp = "";
+      tmp.clear();
     }
   }
 

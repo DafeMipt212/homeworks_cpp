@@ -1,7 +1,8 @@
+#include "utils.hpp"
+
 #include <iostream>
 #include <regex>
 #include <stack>
-#include "utils.hpp"
 
 bool is_number(const std::string &str) {
     static const std::regex r(R"([+-]?(\d*\.)?\d+([Ee[+-]?\d+)?)");
@@ -24,10 +25,10 @@ double Calculate(const std::string& data) {
                     double tmp_ans = Calculate(tmp);
    
                     if (multipl) {
-                        terms[terms.size()-1] *= tmp_ans;
+                        terms[terms.size() - 1] *= tmp_ans;
                         multipl = 0;
                     } else if (division) {
-                        terms[terms.size()-1] /= tmp_ans;
+                        terms[terms.size() - 1] /= tmp_ans;
                         division = 0;
                     } else if (minus) {
                         terms.push_back(-tmp_ans);
@@ -68,10 +69,10 @@ double Calculate(const std::string& data) {
         }
 
         if (multipl) {
-            terms[terms.size()-1] *= std::stoi(number);
+            terms[terms.size() - 1] *= std::stoi(number);
             multipl = 0;
         } else if (division) {
-            terms[terms.size()-1] /= std::stoi(number);
+            terms[terms.size() - 1] /= std::stoi(number);
             division = 0;
         } else if (minus) {
             terms.push_back(-std::stoi(number));
@@ -96,10 +97,10 @@ double Calculate(const std::string& data) {
     }
 
     if (multipl) {
-        terms[terms.size()-1] *= std::stoi(number);
+        terms[terms.size() - 1] *= std::stoi(number);
         multipl = 0;
     } else if (division) {
-        terms[terms.size()-1] /= std::stoi(number);
+        terms[terms.size() - 1] /= std::stoi(number);
         division = 0;
     } else if (minus) {
         terms.push_back(-std::stoi(number));
