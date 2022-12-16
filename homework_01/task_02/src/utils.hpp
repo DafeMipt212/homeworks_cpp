@@ -4,4 +4,4 @@
 #include <string_view>
 #include <vector>
 
-double Calculate(const std::string& data);
+int Calculate(const std::string& data);

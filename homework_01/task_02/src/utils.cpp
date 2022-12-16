@@ -9,8 +9,8 @@ bool is_number(const std::string &str) {
     return std::regex_match(str, r);
 }
 
-double Calculate(const std::string& data) {
-    std::vector<double> terms;
+int Calculate(const std::string& data) {
+    std::vector<int> terms;
     std::string tmp;
     std::string number;
     bool is_brackets = 0;
@@ -22,7 +22,7 @@ double Calculate(const std::string& data) {
         if (is_brackets) {
             if (data[i] == ')') {
                 try {
-                    double tmp_ans = Calculate(tmp);
+                    int tmp_ans = Calculate(tmp);
    
                     if (multipl) {
                         terms[terms.size() - 1] *= tmp_ans;
@@ -56,6 +56,10 @@ double Calculate(const std::string& data) {
             data[i] != '(' &&
             data[i] != ')') {
             number += data[i];
+            continue;
+        }
+
+        if (number.empty()) {
             continue;
         }
 
@@ -109,7 +113,7 @@ double Calculate(const std::string& data) {
         terms.push_back(std::stoi(number));
     }
 
-    double answer = 0;
+    int answer = 0;
 
     for (auto n : terms) {
         answer += n;
