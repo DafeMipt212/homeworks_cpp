@@ -5,3 +5,4 @@
 #include <vector>
 
 int Calculate(const std::string& data);
+
