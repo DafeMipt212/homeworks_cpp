@@ -1,10 +1,17 @@
 #include <iostream>
-
+#include <sstream>
 #include <utils.hpp>
+using namespace std;
 
 int main() {
-  std::string data;
-  std::getline(std::cin, data);
-  std::cout << Calculate(data);
-  return 0;
+    using namespace std;
+    while (!cin.eof()) {
+        cout << "Expression: ";
+        string line;
+        getline(cin, line);
+        if (!line.empty()) {
+            auto res = Сalculate(line);
+            cout << "Result is " << res << endl;
+        }
+    }
 }

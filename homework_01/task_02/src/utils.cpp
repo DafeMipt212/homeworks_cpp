@@ -1,42 +1,52 @@
 #include "utils.hpp"
-#include <stack>
+#include <sstream>
 #include <iostream>
 using namespace std;
 
-
-
-int Calculate(const std::string& data) {
-  char oper = data[1];
-  char n1 = data[0];
-  char n2 = data[2];
-  int num1 = n1 - 48;
-  int num2 = n2 - 48;
-  int result;
-  switch (oper) {
-      case '+':
-        result = num1 + num2;
-        break;
-
-      case '-':
-        result = num1 - num2;
-        break;
-
-      case '*':
-        result = num1 * num2;
-        break;
-
-       case '/':
-        if (num2 == 0){
-          result=2147483647;
-        }
-        else{
-          result = (int)num1 / num2;
-        }
-        break;
-      default:
-        cout << "Error! operator is not correct";
-        break;
-
+int readNumber(istringstream& ss) {
+    int res;
+    ss >> res;
+    if (ss.fail()) {
+        throw std::runtime_error("Number expected here");
     }
-return result;
+    return res;
+}
+
+bool isMultDiv(char op) {
+    return op == '*' || op == '/';
+}
+
+int evaluateMultDiv(istringstream& ss) {
+    auto res = readNumber(ss);
+    while (ss.good()) {
+        char op;
+        ss >> op;
+        if (!isMultDiv(op)) {
+            ss.putback(op);
+            return res;
+        }
+        auto right = readNumber(ss);
+        switch (op) {
+            case '*': res *= right; break;
+            case '/': res /= right; break;
+            default: throw std::runtime_error("Unexpected operator here");
+        }
+    }
+    return res;
+}
+
+int Сalculate(string expr) {
+    istringstream ss(expr);
+    auto res = evaluateMultDiv(ss);
+    while (ss.good()) {
+        char op;
+        ss >> op;
+        auto right = evaluateMultDiv(ss);
+        switch (op) {
+            case '+': res += right; break;
+            case '-': res -= right; break;
+            default: throw std::runtime_error("Unexpected operator here");
+        }
+    }
+    return res;
 }
