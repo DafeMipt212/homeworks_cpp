@@ -1,4 +1,5 @@
 #include "utils.hpp"
+
 #include <stack>
 
 int Calculate(const std::string& data) {
@@ -10,19 +11,19 @@ int Calculate(const std::string& data) {
     case ('+'):
         result = a + b;
         return result; 
-        break;
+        
     case ('-'):
         result = a - b;
         return result; 
-        break;
+        
     case ('*'):
         result = a * b;
         return result; 
-        break;
+        
     case ('/'):
         result = a / b;
         return result; 
-        break;
+        
     }
     return 0;
 }
