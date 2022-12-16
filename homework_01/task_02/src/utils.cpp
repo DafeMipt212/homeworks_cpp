@@ -22,6 +22,7 @@ int Calculate(const std::string& data) {
         if (is_brackets) {
             if (data[i] == ')') {
                 try {
+                    std::cout << tmp << '\n';
                     int tmp_ans = Calculate(tmp);
    
                     if (multipl) {
@@ -59,7 +60,8 @@ int Calculate(const std::string& data) {
             continue;
         }
 
-        if (number.empty()) {
+        if (data[i] == '(') {
+            is_brackets = 1;
             continue;
         }
 
@@ -67,22 +69,19 @@ int Calculate(const std::string& data) {
             throw ("ошибка!\n");
         }
 
-        if (data[i] == '(') {
-            is_brackets = 1;
-            continue;
-        }
-
-        if (multipl) {
-            terms[terms.size() - 1] *= std::stoi(number);
-            multipl = 0;
-        } else if (division) {
-            terms[terms.size() - 1] /= std::stoi(number);
-            division = 0;
-        } else if (minus) {
-            terms.push_back(-std::stoi(number));
-            minus = 0;
-        } else {
-            terms.push_back(std::stoi(number));
+        if (!number.empty()) {
+            if (multipl) {
+                terms[terms.size() - 1] *= std::stoi(number);
+                multipl = 0;
+            } else if (division) {
+                terms[terms.size() - 1] /= std::stoi(number);
+                division = 0;
+            } else if (minus) {
+                terms.push_back(-std::stoi(number));
+                minus = 0;
+            } else {
+                terms.push_back(std::stoi(number));
+            }
         }
 
         if (data[i] == '*') {
@@ -100,17 +99,19 @@ int Calculate(const std::string& data) {
         number = "";
     }
 
-    if (multipl) {
-        terms[terms.size() - 1] *= std::stoi(number);
-        multipl = 0;
-    } else if (division) {
-        terms[terms.size() - 1] /= std::stoi(number);
-        division = 0;
-    } else if (minus) {
-        terms.push_back(-std::stoi(number));
-        minus = 0;
-    } else {
-        terms.push_back(std::stoi(number));
+    if (!number.empty()) {
+        if (multipl) {
+            terms[terms.size() - 1] *= std::stoi(number);
+            multipl = 0;
+        } else if (division) {
+            terms[terms.size() - 1] /= std::stoi(number);
+            division = 0;
+        } else if (minus) {
+            terms.push_back(-std::stoi(number));
+            minus = 0;
+        } else {
+            terms.push_back(std::stoi(number));
+        }
     }
 
     int answer = 0;
