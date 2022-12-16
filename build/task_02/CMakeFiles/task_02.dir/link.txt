@@ -1,0 +1,1 @@
+/usr/bin/clang++-14 -g CMakeFiles/task_02.dir/src/main.cpp.o CMakeFiles/task_02.dir/src/utils.cpp.o -o task_02 

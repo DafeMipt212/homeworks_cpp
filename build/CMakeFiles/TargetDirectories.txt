@@ -1,0 +1,16 @@
+/home/direwooolf/homeworks_cpp/build/CMakeFiles/edit_cache.dir
+/home/direwooolf/homeworks_cpp/build/CMakeFiles/rebuild_cache.dir
+/home/direwooolf/homeworks_cpp/build/task_01/CMakeFiles/task_01.dir
+/home/direwooolf/homeworks_cpp/build/task_01/CMakeFiles/tests_01.dir
+/home/direwooolf/homeworks_cpp/build/task_01/CMakeFiles/edit_cache.dir
+/home/direwooolf/homeworks_cpp/build/task_01/CMakeFiles/rebuild_cache.dir
+/home/direwooolf/homeworks_cpp/build/_deps/catch2-build/CMakeFiles/edit_cache.dir
+/home/direwooolf/homeworks_cpp/build/_deps/catch2-build/CMakeFiles/rebuild_cache.dir
+/home/direwooolf/homeworks_cpp/build/_deps/catch2-build/src/CMakeFiles/Catch2.dir
+/home/direwooolf/homeworks_cpp/build/_deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir
+/home/direwooolf/homeworks_cpp/build/_deps/catch2-build/src/CMakeFiles/edit_cache.dir
+/home/direwooolf/homeworks_cpp/build/_deps/catch2-build/src/CMakeFiles/rebuild_cache.dir
+/home/direwooolf/homeworks_cpp/build/task_02/CMakeFiles/task_02.dir
+/home/direwooolf/homeworks_cpp/build/task_02/CMakeFiles/tests_02.dir
+/home/direwooolf/homeworks_cpp/build/task_02/CMakeFiles/edit_cache.dir
+/home/direwooolf/homeworks_cpp/build/task_02/CMakeFiles/rebuild_cache.dir
