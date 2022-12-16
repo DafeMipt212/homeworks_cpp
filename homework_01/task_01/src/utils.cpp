@@ -45,5 +45,7 @@ std::vector<std::string> SplitString(const std::string& data, const char& del) {
 			}
 		}
 	}
+	if (onestring != "")
+		allstrings.push_back(onestring);
 	return allstrings;
 }
