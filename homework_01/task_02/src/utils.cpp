@@ -3,12 +3,13 @@
 #include <stack>
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-int Calculate(string& str) {
-    str += " ";
+int Calculate(const string& str) {
+
     string CurrentString = "";
-    char* ptr = &(str[0]);
+    const char* ptr = &(str[0]);
     vector <string> data;
 
     while(*ptr != '\0'){
@@ -21,7 +22,7 @@ int Calculate(string& str) {
             data.push_back(CurrentString);
             CurrentString = "";
             ++ptr;
-            }
+        }
 
         CurrentString += *ptr;
         ++ptr;

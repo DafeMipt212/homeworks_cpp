@@ -3,35 +3,35 @@
 #include <stack>
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-vector <string> SplitString(string& s){
-    s += " ";
-    string CurrentString = "";
-    char* ptr = &(s[0]);
-    vector <string> data;
+vector <string> SplitString(const string& s){
+    
+    string Current_String = "";
+    const char* ptr = &(s[0]);
+    vector <string> result;
 
     while(*ptr != '\0'){
         if (*ptr == '(') {
             while((*ptr != ')') && (*ptr != '\0')){
-                CurrentString += *ptr;
+                Current_String += *ptr;
                 ++ptr;
             }
-            CurrentString += *ptr;
+            Current_String += *ptr;
             ++ptr;
-            data.push_back(CurrentString);
-            CurrentString = "";
+            result.push_back(Current_String);
+            Current_String = "";
         }
         if ((*ptr == ' ') || (*ptr == '\t')) {
-            if (CurrentString != "") data.push_back(CurrentString);
-            CurrentString = "";
+            if (Current_String != "") result.push_back(Current_String);
+            Current_String = "";
         }
         else {
-            CurrentString += *ptr;
-            }
+            Current_String += *ptr;
+        }
         ++ptr;
     }    
-    for(int i = 0; i < data.size(); ++i){
-        cout << data[i] << endl;} 
-    return data;
-    }
+
+    return result;
+}
