@@ -2,15 +2,14 @@
 
 #include <iostream>
 #include <regex>
-#include <stack>
 
 bool is_number(const std::string &str) {
     static const std::regex r(R"([+-]?(\d*\.)?\d+([Ee[+-]?\d+)?)");
     return std::regex_match(str, r);
 }
 
-int Calculate(const std::string& data) {
-    std::vector<int> terms;
+double Calculate(const std::string& data) {
+    std::vector<double> terms;
     std::string tmp;
     std::string number;
     bool is_brackets = 0;
@@ -29,7 +28,7 @@ int Calculate(const std::string& data) {
                 }
 
                 try {
-                    int tmp_ans = Calculate(tmp);
+                    double tmp_ans = Calculate(tmp);
    
                     if (multipl) {
                         terms[terms.size() - 1] *= tmp_ans;
@@ -81,16 +80,16 @@ int Calculate(const std::string& data) {
 
         if (!number.empty()) {
             if (multipl) {
-                terms[terms.size() - 1] *= std::stoi(number);
+                terms[terms.size() - 1] *= std::stod(number);
                 multipl = 0;
             } else if (division) {
-                terms[terms.size() - 1] /= std::stoi(number);
+                terms[terms.size() - 1] /= std::stod(number);
                 division = 0;
             } else if (minus) {
-                terms.push_back(-std::stoi(number));
+                terms.push_back(-std::stod(number));
                 minus = 0;
             } else {
-                terms.push_back(std::stoi(number));
+                terms.push_back(std::stod(number));
             }
         }
 
@@ -111,20 +110,20 @@ int Calculate(const std::string& data) {
 
     if (!number.empty()) {
         if (multipl) {
-            terms[terms.size() - 1] *= std::stoi(number);
+            terms[terms.size() - 1] *= std::stod(number);
             multipl = 0;
         } else if (division) {
-            terms[terms.size() - 1] /= std::stoi(number);
+            terms[terms.size() - 1] /= std::stod(number);
             division = 0;
         } else if (minus) {
-            terms.push_back(-std::stoi(number));
+            terms.push_back(-std::stod(number));
             minus = 0;
         } else {
-            terms.push_back(std::stoi(number));
+            terms.push_back(std::stod(number));
         }
     }
 
-    int answer = 0;
+    double answer = 0;
 
     for (auto n : terms) {
         answer += n;
