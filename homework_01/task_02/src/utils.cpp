@@ -11,19 +11,15 @@ int Calculate(const std::string& data) {
     case ('+'):
         result = a + b;
         return result; 
-        
     case ('-'):
         result = a - b;
         return result; 
-        
     case ('*'):
         result = a * b;
         return result; 
-        
     case ('/'):
         result = a / b;
         return result; 
-        
     }
     return 0;
 }
