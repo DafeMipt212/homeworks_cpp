@@ -14,6 +14,7 @@ int Calculate(const std::string& data) {
     std::string tmp;
     std::string number;
     bool is_brackets = 0;
+    int tmp_brackets = 0;
     bool multipl = 0;
     bool division = 0;
     bool minus = 0;
@@ -21,8 +22,13 @@ int Calculate(const std::string& data) {
     for (size_t i = 0; i < data.size(); ++i) {
         if (is_brackets) {
             if (data[i] == ')') {
+                if (tmp_brackets) {
+                    tmp += data[i];
+                    tmp_brackets -= 1;
+                    continue;
+                }
+
                 try {
-                    std::cout << tmp << '\n';
                     int tmp_ans = Calculate(tmp);
    
                     if (multipl) {
@@ -44,6 +50,10 @@ int Calculate(const std::string& data) {
                     throw (error);
                 }
             } else {
+                if (data[i] == '(') {
+                    tmp_brackets += 1;
+                }
+
                 tmp += data[i];
             }
 
